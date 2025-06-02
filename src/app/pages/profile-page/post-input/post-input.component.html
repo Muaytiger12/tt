@@ -1,0 +1,9 @@
+<app-avatar-circle *ngIf="profile() as profile"
+                   class="size32"
+                   [avatarUrl]="profile.avatarUrl">
+
+</app-avatar-circle>
+<textarea [(ngModel)]="postText" class="hidden-textarea" (input)="onTextAreaInput($event)"></textarea>
+<button class="btn-icon" (click)="onSubmit()">
+  <svg icon="triangle" class="svg16"></svg>
+</button>

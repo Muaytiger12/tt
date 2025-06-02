@@ -1,0 +1,38 @@
+
+@for (message of message();track message.id ) {
+  <div class="message-wrapper" [class.wrapper-reactive]="message.isMine">
+  <app-avatar-circle class="size32" [avatarUrl]="message.user?.avatarUrl"></app-avatar-circle>
+  <div class="message-container">
+
+    <strong class="medium-text mb8" [class.text-reactive]="message.isMine">
+      <span>
+
+      {{ message.user?.firstName }} {{ message.user?.lastName }}
+      </span>
+<span>
+
+       {{ message.createdAt | date: 'HH:mm' }}
+</span>
+
+    </strong>
+    <div class="message-text medium-text">
+      {{ message.text}}
+    </div>
+  </div>
+  </div>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
