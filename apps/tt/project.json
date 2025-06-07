@@ -23,7 +23,7 @@
         "assets": [
           {
             "glob": "**/*",
-            "input": "apps/tt/public"
+            "input": "public"
           }
         ],
         "styles": ["apps/tt/src/styles.scss"],

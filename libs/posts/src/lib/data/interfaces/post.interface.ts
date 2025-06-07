@@ -1,4 +1,7 @@
-import { Profile } from 'profile';
+
+// @ts-ignore
+import { Profile } from 'interfaces/profile';
+
 
 export interface PostCreateDTO {
   title: string;

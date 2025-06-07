@@ -21,7 +21,10 @@
     "sourceMap": true,
     "paths": {
       "auth": ["libs/auth/src/index.ts"],
+      "chat": ["libs/chat/src/index.ts"],
       "common-ui": ["libs/common-ui/src/index.ts"],
+      "interfaces/*": ["libs/interfaces/src/lib/*"],
+      "layout": ["libs/layout/src/index.ts"],
       "posts": ["libs/posts/src/index.ts"],
       "profile": ["libs/profile/src/index.ts"],
       "shared": ["libs/shared/src/index.ts"]

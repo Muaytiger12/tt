@@ -1,9 +1,0 @@
-<div class="messages-wrapper">
-  <div class="c" *ngFor="let i of groupByDate()">
-    <div class="message-date">
-      {{ i[0] }}
-    </div>
-    <app-chat-workspace-messages [message]="i[1]"></app-chat-workspace-messages>
-  </div>
-</div>
-<app-message-input (emitter)="onSendMessage($event)"></app-message-input>

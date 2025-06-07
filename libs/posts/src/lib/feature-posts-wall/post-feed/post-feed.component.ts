@@ -4,16 +4,19 @@ import {
   inject,
   Renderer2,
 } from '@angular/core';
-import {PostInputComponent} from 'posts';
+import {PostInputComponent} from '../../ui/index';
 import { PostService } from '../../data/services/post.service';
 import { PostComponent } from '../post/post.component';
 
 import { debounceTime, firstValueFrom, fromEvent, Subscription } from 'rxjs';
 
+import { GlobalStoreService } from 'shared';
 
-import {ProfileService} from 'profile';
+
+
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'app-post-feed',
   imports: [PostInputComponent, PostComponent],
   templateUrl: './post-feed.component.html',
@@ -23,7 +26,7 @@ export class PostFeedComponent {
   postService = inject(PostService);
   feed = inject(PostService).posts;
 
-  profile = inject(ProfileService).me;
+  profile = inject(GlobalStoreService).me;
 
   hostElement = inject(ElementRef);
   r2 = inject(Renderer2);

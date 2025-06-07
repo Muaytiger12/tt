@@ -12,11 +12,13 @@ import {
 import { NgIf } from '@angular/common';
 
 import { FormsModule } from '@angular/forms';
-import {ProfileService} from 'profile';
+//
 import {AvatarCircleComponent} from 'common-ui';
 import {SvgComponent} from 'common-ui';
+import { GlobalStoreService } from 'shared';
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'app-post-input',
   imports: [AvatarCircleComponent, NgIf, SvgComponent, FormsModule],
   templateUrl: './post-input.component.html',
@@ -25,7 +27,7 @@ import {SvgComponent} from 'common-ui';
 export class PostInputComponent {
   isCommentInput = input(false);
   r2 = inject(Renderer2);
-  profile = inject(ProfileService).me;
+  profile = inject(GlobalStoreService).me;
   postId = input<number>(0);
   postText = '';
   @Output() submitted = new EventEmitter<string>();

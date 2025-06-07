@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Profile } from '../../../../../../libs/profile/src/lib/data/interfaces/profile.interface';
+import { Profile } from '../../../../../../libs/interfaces/src/lib/profile/profile.interface';
 import { ImgUrlPipe } from '../../../../../../libs/common-ui/src/lib/pipes/img-url.pipe';
 
 @Component({
