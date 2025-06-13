@@ -1,13 +1,25 @@
 import { Routes } from '@angular/router';
-import { LoginPageComponent } from '../../../../libs/auth/src/lib/feature-login/login-page/login-page.component';
-import { SearchPageComponent } from '../../../../libs/profile/src/lib/feature-profile-list/search-page/search-page.component';
-import { ProfilePageComponent } from 'profile';
-import { LayoutComponent } from '../../../../libs/layout/src/lib/layout/layout.component';
 
-import { SettingsPageComponent } from '../../../../libs/profile/src/lib/feature-profile-settings/settings-page/settings-page.component';
-import { chatsRoutes } from '../../../../libs/chat/src/lib/feature-chats-workspace/chats-page/chatsRoutes';
-import { FormsComponent } from './experimantal/src/lib/forms/forms.component';
-import {canActivateAuth} from 'auth';
+
+import {
+  ProfileEffects,
+  profileFeature,
+  ProfilePageComponent,
+  SearchPageComponent,
+  SettingsPageComponent
+} from 'profile';
+import { chatsRoutes } from 'chat';
+import { FormsComponent } from 'experimental';
+import { canActivateAuth, LoginPageComponent } from 'auth';
+import { LayoutComponent } from 'layout';
+import { provideState } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
+
+
+
+
+
+
 
 
 export const routes: Routes = [
@@ -27,6 +39,7 @@ export const routes: Routes = [
       {
         path: 'search',
         component: SearchPageComponent,
+        providers: [ provideState(profileFeature),provideEffects(ProfileEffects) ]
       },
       {
         path: 'settings',
@@ -37,7 +50,7 @@ export const routes: Routes = [
         loadChildren: () => chatsRoutes,
       },
       {
-        path: 'experimantal',
+        path: 'experimental',
         component: FormsComponent,
       },
     ],

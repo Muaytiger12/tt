@@ -1,10 +1,11 @@
 import { Component, input } from '@angular/core';
 
-import { LastMessageRes } from '../../data/interfaces/chats.interface';
 import { AvatarCircleComponent } from 'common-ui';
+import { LastMessageRes } from 'data-access';
 
 
 @Component({
+
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'button[chats]',
   imports: [AvatarCircleComponent],

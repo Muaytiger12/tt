@@ -1,23 +1,11 @@
-import {
-  Component,
-  ElementRef,
-  inject,
-  Renderer2,
-} from '@angular/core';
-import {PostInputComponent} from '../../ui/index';
-import { PostService } from '../../data/services/post.service';
+import { Component, ElementRef, inject, Renderer2 } from '@angular/core';
+import { PostInputComponent } from '../../ui/index';
 import { PostComponent } from '../post/post.component';
-
 import { debounceTime, firstValueFrom, fromEvent, Subscription } from 'rxjs';
-
-import { GlobalStoreService } from 'shared';
-
-
-
+import { GlobalStoreService, PostService } from 'data-access';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'app-post-feed',
+  selector: 'lib-post-feed',
   imports: [PostInputComponent, PostComponent],
   templateUrl: './post-feed.component.html',
   styleUrl: './post-feed.component.scss',

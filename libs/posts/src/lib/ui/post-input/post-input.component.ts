@@ -8,21 +8,16 @@ import {
   Renderer2,
 } from '@angular/core';
 
-
 import { NgIf } from '@angular/common';
-
 import { FormsModule } from '@angular/forms';
-//
-import {AvatarCircleComponent} from 'common-ui';
-import {SvgComponent} from 'common-ui';
-import { GlobalStoreService } from 'shared';
+import { AvatarCircleComponent, SvgComponent } from 'common-ui';
+import { GlobalStoreService } from 'data-access';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'app-post-input',
   imports: [AvatarCircleComponent, NgIf, SvgComponent, FormsModule],
-  templateUrl: './post-input.component.html',
+  selector: 'lib-post-input',
   styleUrl: './post-input.component.scss',
+  templateUrl: './post-input.component.html',
 })
 export class PostInputComponent {
   isCommentInput = input(false);

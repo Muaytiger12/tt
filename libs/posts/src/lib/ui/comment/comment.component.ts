@@ -1,10 +1,10 @@
 import { Component, input } from '@angular/core';
-import { Comments } from '../../data/interfaces/post.interface';
 import { AvatarCircleComponent } from 'common-ui';
 import { DatePipe } from '@angular/common';
+import { Comments } from 'data-access';
 
 @Component({
-  selector: 'app-comment',
+  selector: 'lib-comment',
   imports: [AvatarCircleComponent, DatePipe],
   templateUrl: './comment.component.html',
   styleUrl: './comment.component.scss',

@@ -1,22 +1,19 @@
 import { Component, inject, input, OnInit, signal } from '@angular/core';
-import { Comments, Post } from '../../data/interfaces/post.interface';
 import { AvatarCircleComponent } from 'common-ui';
 import { SvgComponent } from 'common-ui';
-import { PostInputComponent } from 'posts';
-import { CommentComponent } from 'posts';
-import { PostService } from 'posts';
 import { firstValueFrom } from 'rxjs';
 import { HoursPipe } from 'common-ui';
-import { ProfileService } from 'profile';
+import { CommentComponent, PostInputComponent } from '../../ui/index';
+import { Comments, GlobalStoreService, Post, PostService } from 'data-access';
 
 @Component({
-  selector: 'app-post',
+  selector: 'lib-post',
   imports: [
     AvatarCircleComponent,
     SvgComponent,
     PostInputComponent,
-    CommentComponent,
     HoursPipe,
+    CommentComponent,
   ],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss',
@@ -24,7 +21,7 @@ import { ProfileService } from 'profile';
 export class PostComponent implements OnInit {
   post = input<Post>();
   comments = signal<Comments[]>([]);
-  profile = inject(ProfileService).me;
+  profile = inject(GlobalStoreService).me;
   postService = inject(PostService);
 
   async ngOnInit() {

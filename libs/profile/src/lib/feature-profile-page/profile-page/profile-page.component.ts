@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { ProfileHeaderComponent } from '../../ui/profile-header/profile-header.component';
+import { ProfileHeaderComponent } from '../../ui/index';
 
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { switchMap } from 'rxjs';
@@ -9,12 +9,11 @@ import { SvgComponent } from 'common-ui';
 import { ImgUrlPipe } from 'common-ui';
 
 import {PostFeedComponent} from 'posts';
-import { ProfileService } from '../../data/index';
+import { ProfileService } from 'data-access';
 
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'app-profile-page',
+  selector: 'lib-profile-page',
   imports: [
     ProfileHeaderComponent,
     AsyncPipe,

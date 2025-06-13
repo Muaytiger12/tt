@@ -7,11 +7,10 @@ import {
 } from '@angular/forms';
 
 import { Router } from '@angular/router';
-// @ts-ignore
-import {AuthService} from 'auth';
+import { AuthService } from 'data-access';
 
 @Component({
-  selector: 'app-login-page',
+  selector: 'lib-login-page',
   imports: [ReactiveFormsModule],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',

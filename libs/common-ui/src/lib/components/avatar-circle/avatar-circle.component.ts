@@ -2,10 +2,8 @@ import { Component, input } from '@angular/core';
 import { ImgUrlPipe } from '../../pipes/img-url.pipe';
 
 
-
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'app-avatar-circle',
+  selector: 'lib-avatar-circle',
   imports: [ImgUrlPipe],
   templateUrl: './avatar-circle.component.html',
   styleUrl: './avatar-circle.component.scss',

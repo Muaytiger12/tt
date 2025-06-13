@@ -1,10 +1,9 @@
-import { Component, EventEmitter, Output, signal } from '@angular/core';
-import { SvgComponent } from '../../../../../common-ui/src/lib/components/svg/svg.component';
-import { DndDirective } from '../../../../../common-ui/src/lib/directives/dnd.directive';
+import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { DndDirective, SvgComponent } from 'common-ui';
 
 @Component({
-  selector: 'app-avatar-upload',
+  selector: 'lib-avatar-upload',
   imports: [SvgComponent, DndDirective, FormsModule],
   templateUrl: './avatar-upload.component.html',
   styleUrl: './avatar-upload.component.scss',

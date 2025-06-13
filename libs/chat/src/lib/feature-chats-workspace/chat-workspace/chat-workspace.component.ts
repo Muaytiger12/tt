@@ -5,11 +5,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { filter, of, switchMap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import { ChatsService } from '../../data/index';
+import { ChatsService } from 'data-access';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'app-chat-workspace',
+
+  selector: 'lib-chat-workspace',
   imports: [
     ChatWorkspaceHeaderComponent,
     ChatWorkspaceMessagesWrapperComponent,

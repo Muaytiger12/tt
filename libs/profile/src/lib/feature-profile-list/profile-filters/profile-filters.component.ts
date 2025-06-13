@@ -4,36 +4,39 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { ProfileService } from '../../data/services/profile.service';
-import { debounceTime, startWith, Subscription, switchMap } from 'rxjs';
+import { debounceTime, startWith, Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import {profileActions} from '../../store';
+
+
+
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'app-profile-filters',
+  selector: 'lib-profile-filters',
   imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './profile-filters.component.html',
   styleUrl: './profile-filters.component.scss',
 })
 export class ProfileFiltersComponent {
-  fd = inject(FormBuilder);
-  profileService = inject(ProfileService);
+  fb = inject(FormBuilder);
   sub = new Subscription();
-  formFilters = this.fd.group({
+  store = inject(Store);
+
+  formFilters = this.fb.group({
     firstName: [''],
     lastName: [''],
     stack: [''],
   });
 
   constructor() {
+
     this.sub = this.formFilters.valueChanges
-      .pipe(
-        startWith({}),
-        debounceTime(400),
-        switchMap((formValue) => {
-          return this.profileService.filterProfile(formValue);
-        })
-      )
-      .subscribe();
+      .pipe(startWith({}), debounceTime(400))
+      .subscribe((form) => {
+
+        this.store.dispatch(profileActions.filterEvents({filters: form}))
+
+      });
   }
 
   ngOnDestroy() {

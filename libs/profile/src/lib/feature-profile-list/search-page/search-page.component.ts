@@ -1,16 +1,18 @@
 import { Component, inject } from '@angular/core';
-import { ProfileService } from '../../data/index';
 import { ProfileCardComponent } from '../../ui';
 import { ProfileFiltersComponent } from '../profile-filters/profile-filters.component';
+import { Store } from '@ngrx/store';
+
+import { selectFilteredProfiles } from '../../store';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'app-search-page',
+
+  selector: 'lib-search-page',
   imports: [ProfileCardComponent, ProfileFiltersComponent],
   templateUrl: './search-page.component.html',
   styleUrl: './search-page.component.scss',
 })
 export class SearchPageComponent {
-  profileService = inject(ProfileService);
-  profiles = this.profileService.filteredProfiles;
+  store = inject(Store);
+  profiles = this.store.selectSignal(selectFilteredProfiles);
 }

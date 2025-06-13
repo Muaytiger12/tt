@@ -1,9 +1,9 @@
 import { Component, effect, inject, ViewChild } from '@angular/core';
 
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ProfileService } from '../../data/index';
 import { firstValueFrom } from 'rxjs';
 import { AvatarUploadComponent, ProfileHeaderComponent } from '../../ui';
+import { ProfileService } from 'data-access';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector

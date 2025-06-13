@@ -23,11 +23,11 @@
       "auth": ["libs/auth/src/index.ts"],
       "chat": ["libs/chat/src/index.ts"],
       "common-ui": ["libs/common-ui/src/index.ts"],
-      "interfaces/*": ["libs/interfaces/src/lib/*"],
+      "data-access": ["libs/data-access/src/index.ts"],
+      "experimental": ["libs/experimental/src/index.ts"],
       "layout": ["libs/layout/src/index.ts"],
       "posts": ["libs/posts/src/index.ts"],
       "profile": ["libs/profile/src/index.ts"],
-      "shared": ["libs/shared/src/index.ts"]
     },
     "baseUrl": ".",
     "rootDir": "."

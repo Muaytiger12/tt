@@ -1,9 +1,9 @@
 @if (post(); as post) {
 
-<app-avatar-circle
+<lib-avatar-circle
   class="size32"
   [avatarUrl]="post.author.avatarUrl"
-></app-avatar-circle>
+></lib-avatar-circle>
 <main class="post-body">
   <div class="post-header">
     <strong class="post__author"
@@ -20,13 +20,13 @@
   </div>
   <div class="post-comments__wrapper">
     @for(comment of comments(); track comment.id){
-    <app-comment [comment]="comment"></app-comment>
+    <lib-comment [comment]="comment"></lib-comment>
     }
   </div>
-  <app-post-input
+  <lib-post-input
     (submitted)="onCreatedComment($event)"
     [postId]="post.id"
     [isCommentInput]="true"
-  ></app-post-input>
+  ></lib-post-input>
 </main>
 }

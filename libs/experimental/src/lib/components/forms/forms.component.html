@@ -1,0 +1,153 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h4 class="h4 mb16">Информация о доставке</h4>
+  <label class="tt-control-label mb16">
+    Тип получателя
+    <select class="tt-input" formControlName="type">
+      <option [value]="RecevierType.PERSON">Физическое лицо</option>
+      <option [value]="RecevierType.COMPANY">Юридическое лицо</option>
+    </select>
+  </label>
+  <label class="tt-control-label mb16">
+    Имя
+    <input
+      class="tt-input"
+      type="text"
+      placeholder="Введите имя"
+      formControlName="name"
+      required
+    />
+    <!--    <small class="valid">Это поле обязан(-а) заполнить ты!</small>-->
+  </label>
+
+  @if (form.controls.name.touched && form.controls.name.hasError('nameValid')) {
+  <small>{{ form.controls.name.getError('nameValid').message }}</small>
+  }
+  <!--  @if (form.controls.name.touched && form.controls.name.hasError('startsWith')) {-->
+  <!--    <small>{{ form.controls.name.getError('startsWith') }}</small>-->
+  <!--  }-->
+  @if (form.controls.name.touched && form.controls.name.hasError('required')) {
+
+  <span>Это поле обязан(-а) заполнить ты!</span>
+  } @if (form.value.type === 'COMPANY') {
+  <label class="tt-control-label mb16">
+    ИНН
+    <input
+      class="tt-input"
+      type="text"
+      placeholder="Введите ИНН"
+      formControlName="inn"
+    />
+  </label>
+  } @else {
+  <label class="tt-control-label mb16">
+    Фамилия
+    <input
+      class="tt-input"
+      type="text"
+      placeholder="Введите фамилию"
+      formControlName="lastName"
+    />
+  </label>
+  }
+  <div
+    style="display: flex; justify-content: space-between; align-items: center"
+  >
+    <h4 class="h6 mb16 mt20">Период доставки</h4>
+  </div>
+
+  <div formGroupName="dateRange">
+    <div class="two-columns">
+      <label class="tt-control-label mb16">
+        C
+        <input class="tt-input" type="date" formControlName="from" />
+      </label>
+      <label class="tt-control-label mb16">
+        По
+        <input class="tt-input" type="date" formControlName="to" />
+      </label>
+    </div>
+
+    @if (form.controls.dateRange.touched &&
+    form.controls.dateRange.hasError('dateRange')) {
+    <small style="color: tomato">
+      {{ form.controls.dateRange.getError('dateRange')?.message }}</small
+    >
+    }
+  </div>
+
+  <div>
+    <div
+      style="display: flex; justify-content: space-between; align-items: center"
+    >
+      <h4 class="h6 mb16 mt20">Адрес доставки</h4>
+      <button class="btn" style="width: 50px" (click)="addAddress()">+</button>
+    </div>
+    @for (group of form.controls.addresses.controls; track group; let i =
+    $index) {
+    <div
+      class="form-grid"
+      [formGroup]="group"
+      style="display: grid; grid-template-columns: 1fr 1fr; column-gap: 70px"
+    >
+      <label class="tt-control-label mb16">
+        Город
+        <input
+          class="tt-input"
+          type="text"
+          placeholder="Город"
+          formControlName="city"
+        />
+      </label>
+      <label class="tt-control-label mb16">
+        Улица
+        <input
+          class="tt-input"
+          type="text"
+          placeholder="Улица"
+          formControlName="street"
+        />
+      </label>
+      <label class="tt-control-label mb16">
+        Дом
+        <input
+          class="tt-input"
+          type="text"
+          placeholder="Дом"
+          formControlName="build"
+        />
+      </label>
+      <label class="tt-control-label mb16">
+        Квартира
+        <input
+          class="tt-input"
+          type="text"
+          placeholder="Квартира"
+          formControlName="apartment"
+        />
+      </label>
+
+      <button
+        class="btn"
+        style="grid-column-start: 1; grid-column-end: 3; margin-bottom: 30px"
+        (click)="deleteAddress(i)"
+      >
+        Удалить
+      </button>
+    </div>
+    }
+  </div>
+  <div [formGroup]="form.controls.feature">
+    <h4 class="h6 mb16">Дополнительно</h4>
+    <div style="display: grid; gap: 16px">
+      @for (control of form.controls.feature.controls | keyvalue:sort; track
+      control; let i = $index) {
+
+      <label style="display: flex; gap: 8px; align-items: center;">
+        {{ features[i].label }}
+        <input type="checkbox" formControlName="control.key" name="checkbox" />
+      </label>
+      }
+    </div>
+  </div>
+  <button class="btn btn-shadow mt20" type="submit">Подтвердить</button>
+</form>

@@ -1,20 +1,20 @@
 import {
   Component,
   EventEmitter,
-  HostBinding,
   inject,
-  input,
   Output,
   Renderer2,
 } from '@angular/core';
-import { AvatarCircleComponent } from '../../../../../common-ui/src/lib/components/avatar-circle/avatar-circle.component';
+
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
-import { SvgComponent } from '../../../../../common-ui/src/lib/components/svg/svg.component';
-import { ProfileService } from '../../../../../profile/src/lib/data/services/profile.service';
+
+
+import { AvatarCircleComponent, SvgComponent } from 'common-ui';
+import { ProfileService } from 'data-access';
 
 @Component({
-  selector: 'app-message-input',
+  selector: 'lib-message-input',
   imports: [AvatarCircleComponent, FormsModule, NgIf, SvgComponent],
   templateUrl: './message-input.component.html',
   styleUrl: './message-input.component.scss',

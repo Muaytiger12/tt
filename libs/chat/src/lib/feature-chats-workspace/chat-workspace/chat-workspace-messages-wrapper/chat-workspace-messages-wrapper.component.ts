@@ -7,31 +7,29 @@ import {
   OnDestroy,
   OnInit,
   Renderer2,
-  signal,
 } from '@angular/core';
 import { ChatWorkspaceMessagesComponent } from './chat-workspace-messages/chat-workspace-messages.component';
-
-
 
 import {
   BehaviorSubject,
   debounceTime,
   firstValueFrom,
   fromEvent,
-  map,
-  Subscription,
-  tap,
+  Subscription, switchMap,timer
 } from 'rxjs';
 
 import { DateTime } from 'luxon';
-import { NgFor } from '@angular/common';
+import { KeyValuePipe, NgFor } from '@angular/common';
 import { MessageInputComponent } from '../../../ui/message-input/message-input.component';
-import { Chat, ChatsService } from '../../../data/index';
-import { Message } from '../../../data/interfaces/chats.interface';
+import { Chat, ChatsService, Message } from 'data-access';
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'app-chat-workspace-messages-wrapper',
-  imports: [ChatWorkspaceMessagesComponent, MessageInputComponent, NgFor],
+  selector: 'lib-chat-workspace-messages-wrapper',
+  imports: [
+    ChatWorkspaceMessagesComponent,
+    MessageInputComponent,
+    NgFor,
+    KeyValuePipe,
+  ],
   templateUrl: './chat-workspace-messages-wrapper.component.html',
   styleUrl: './chat-workspace-messages-wrapper.component.scss',
 })
@@ -48,21 +46,21 @@ export class ChatWorkspaceMessagesWrapperComponent
   res = new BehaviorSubject(this.groupByDate());
 
   ngOnInit() {
-    // this.pollingSub = timer(0, 50000)
-    //   .pipe(
-    //     switchMap(() => {
-    //       console.log('Послали запрос на отрисовку')
-    //       return this.chatsService.getChatById(this.chat().id)
-    //     })
-    //   )
-    //   .subscribe({
-    //     next: (data) => {
-    //       this.messages.set(data.messages);
-    //     },
-    //     error: (err) => {
-    //       console.error('Ошибка при получении сообщений', err);
-    //     },
-    //   });
+    this.pollingSub = timer(0, 50000)
+      .pipe(
+        switchMap(() => {
+          console.log('Послали запрос на отрисовку')
+          return this.chatsService.getChatById(this.chat().id)
+        })
+      )
+      .subscribe({
+        next: (data) => {
+          this.messages.set(data.messages);
+        },
+        error: (err) => {
+          console.error('Ошибка при получении сообщений', err);
+        },
+      });
     this.groupByDate();
   }
 
@@ -119,8 +117,7 @@ export class ChatWorkspaceMessagesWrapperComponent
       }
       messagesResult[date].push(message);
     });
-    // console.log(messagesResult)
 
-    return Object.entries(messagesResult) as [string, Message][];
+    return messagesResult as [string, Message][];
   }
 }

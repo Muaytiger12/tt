@@ -1,6 +1,6 @@
 @if(profile(); as profile){
 
-<app-profile-header [profile]="profile"></app-profile-header>
+<lib-profile-header [profile]="profile"></lib-profile-header>
 }
 <form action="" class="profile-form__wrapper" [formGroup]="form">
   <div class="profile-form">
@@ -28,7 +28,7 @@
     </label>
     <label class="tt-form-label">
       <span class="tt-form-label-text">Аватар</span>
-      <app-avatar-upload></app-avatar-upload>
+      <lib-avatar-upload></lib-avatar-upload>
     </label>
 
     <label class="tt-form-label">

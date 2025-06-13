@@ -13,7 +13,7 @@ import {
   tap,
   throwError,
 } from 'rxjs';
-import {AuthService} from 'auth';
+import {AuthService} from '../../../../data-access/src/lib/services/auth.service';
 
 let isRefreshing$ = new BehaviorSubject<boolean>(false);
 

@@ -1,15 +1,11 @@
 import { Component, input } from '@angular/core';
 
-import { Profile } from 'profile';
 import { AvatarCircleComponent } from 'common-ui';
-
-
-
-
+import { Profile } from 'data-access';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'app-chat-workspace-header',
+
+  selector: 'lib-chat-workspace-header',
   imports: [AvatarCircleComponent],
   templateUrl: './chat-workspace-header.component.html',
   styleUrl: './chat-workspace-header.component.scss',

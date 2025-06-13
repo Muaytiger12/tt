@@ -1,2 +1,3 @@
-export * from './lib/data/index';
+export * from './lib/ui/index';
+export * from './lib/helpers/index';
 export * from './lib/feature-chats-workspace/index';

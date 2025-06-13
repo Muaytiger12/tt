@@ -1,8 +1,7 @@
 import { canActivateAuth } from './auth.guard';
 import { authTokenInterceptor } from './auth.interceptor';
-import { TokenResponse } from './auth.interface';
-import { AuthService } from './auth.service';
+import { TokenResponse } from '../../../../data-access/src/lib/interfaces/auth.interface';
 
-export { canActivateAuth, authTokenInterceptor, AuthService };
+export { canActivateAuth, authTokenInterceptor };
 export type { TokenResponse };
 

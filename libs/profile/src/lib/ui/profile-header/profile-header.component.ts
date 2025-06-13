@@ -1,9 +1,10 @@
 import { Component, input } from '@angular/core';
-import { Profile } from 'profile';
+
 import { AvatarCircleComponent } from 'common-ui';
+import { Profile } from 'data-access';
 
 @Component({
-  selector: 'app-profile-header',
+  selector: 'lib-profile-header',
   imports: [ AvatarCircleComponent],
   templateUrl: './profile-header.component.html',
   styleUrl: './profile-header.component.scss',
