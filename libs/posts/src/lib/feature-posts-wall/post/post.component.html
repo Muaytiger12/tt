@@ -14,12 +14,12 @@
     <div class="post-counters">
       <span class="comments-amount">
         <svg icon="comment" class="svg16"></svg>
-        <span class="comments-length">{{ comments().length }}</span>
+        <span class="comments-length">{{ post.comments.length }}</span>
       </span>
     </div>
   </div>
   <div class="post-comments__wrapper">
-    @for(comment of comments(); track comment.id){
+    @for(comment of post.comments; track comment.id){
     <lib-comment [comment]="comment"></lib-comment>
     }
   </div>

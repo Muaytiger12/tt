@@ -5,6 +5,8 @@ import { firstValueFrom } from 'rxjs';
 import { HoursPipe } from 'common-ui';
 import { CommentComponent, PostInputComponent } from '../../ui/index';
 import { Comments, GlobalStoreService, Post, PostService } from 'data-access';
+import {Store} from '@ngrx/store';
+import {postsActions} from '../../store';
 
 @Component({
   selector: 'lib-post',
@@ -18,28 +20,30 @@ import { Comments, GlobalStoreService, Post, PostService } from 'data-access';
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss',
 })
-export class PostComponent implements OnInit {
+export class PostComponent {
   post = input<Post>();
-  comments = signal<Comments[]>([]);
+  // comments = signal<Comments[]>([]);
   profile = inject(GlobalStoreService).me;
   postService = inject(PostService);
-
-  async ngOnInit() {
-    this.comments.set(this.post()!.comments);
-  }
+  store = inject(Store);
+  // async ngOnInit() {
+  //   this.comments.set(this.post()!.comments);
+  // }
 
   async onCreatedComment(text: string) {
-    await firstValueFrom(
-      this.postService.createComment({
-        text: text,
-        authorId: this.profile()!.id,
-        postId: this.post()!.id,
+    this.store.dispatch(
+      postsActions.createComment({
+        payload: {
+          text: text,
+          authorId: this.profile()!.id,
+          postId: this.post()!.id,
+        },
       })
     );
 
-    const com = await firstValueFrom(
-      this.postService.getCommentsById(this.post()!.id)
-    );
-    this.comments.set(com);
+    // const com = await firstValueFrom(
+    //   this.postService.getCommentsById(this.post()!.id)
+    // );
+    // this.comments.set(com);
   }
 }

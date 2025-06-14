@@ -22,13 +22,13 @@ export const profileFeature = createFeature({
         profiles: payload.profiles,
       }
     }),
-    // on(profileActions.profileFiltersSave, (state, payload) => {
-    //   console.log('REDUCER',state,payload)
-    //   return {
-    //     ...state,
-    //     profiles: payload.profilesFilter,
-    //   }
-    // })
+    on(profileActions.profileFiltersSave, (state, payload) => {
+      console.log('REDUCER',state,payload)
+      return {
+        ...state,
+        profilesFilters: payload.profilesFilter,
+      }
+    })
 
   ),
 

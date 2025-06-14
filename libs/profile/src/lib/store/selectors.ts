@@ -8,9 +8,10 @@ export const selectFilteredProfiles = createSelector(
      return profiles
   }
 )
-// export const selectSaveFilterProfile = createSelector(
-//   profileFeature.selectProfileFilters,
-//   (profiles) => {
-//      return profiles;
-//   }
-// );
+export const selectSaveFiltersProfile = createSelector(
+  profileFeature.selectProfiles,
+  (profiles) => {
+     return profiles
+  }
+)
+

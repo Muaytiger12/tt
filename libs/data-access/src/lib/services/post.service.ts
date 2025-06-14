@@ -32,9 +32,9 @@ export class PostService {
   createComment(payload: CommentCreateDTO) {
     return this.http.post<Comment>(`${this.baseApiUrl}comment/`, payload);
   }
-  getCommentsById(postId: number) {
-    return this.http
-      .get<Post>(`${this.baseApiUrl}post/${postId}`)
-      .pipe(map((val) => val.comments));
-  }
+  // getCommentsById(postId: number) {
+  //   return this.http
+  //     .get<Post>(`${this.baseApiUrl}post/${postId}`)
+  //     .pipe(map((val) => val.comments));
+  // }
 }

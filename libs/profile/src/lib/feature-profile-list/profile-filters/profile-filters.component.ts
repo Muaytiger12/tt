@@ -6,7 +6,8 @@ import {
 } from '@angular/forms';
 import { debounceTime, startWith, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
-import {profileActions} from '../../store';
+import {profileActions, selectFilteredProfiles} from '../../store';
+import {toObservable} from '@angular/core/rxjs-interop';
 
 
 
@@ -21,7 +22,6 @@ export class ProfileFiltersComponent {
   fb = inject(FormBuilder);
   sub = new Subscription();
   store = inject(Store);
-
   formFilters = this.fb.group({
     firstName: [''],
     lastName: [''],
@@ -29,6 +29,7 @@ export class ProfileFiltersComponent {
   });
 
   constructor() {
+
 
     this.sub = this.formFilters.valueChanges
       .pipe(startWith({}), debounceTime(400))

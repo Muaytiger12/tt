@@ -8,7 +8,7 @@ export interface PostCreateDTO {
   authorId: number;
 }
 
-export interface Post {
+export interface  Post {
   id: number;
   title: string;
   communityId: number;

@@ -14,6 +14,7 @@ import { canActivateAuth, LoginPageComponent } from 'auth';
 import { LayoutComponent } from 'layout';
 import { provideState } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
+import { PostsEffects, postsFeature } from 'posts';
 
 
 
@@ -30,11 +31,12 @@ export const routes: Routes = [
       {
         path: '',
         redirectTo: 'profile/me',
-        pathMatch: 'full',
+        pathMatch: 'full'
       },
       {
         path: 'profile/:id',
         component: ProfilePageComponent,
+        providers: [provideState(postsFeature),provideEffects(PostsEffects)]
       },
       {
         path: 'search',

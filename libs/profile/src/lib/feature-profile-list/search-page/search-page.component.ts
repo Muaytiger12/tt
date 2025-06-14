@@ -3,7 +3,7 @@ import { ProfileCardComponent } from '../../ui';
 import { ProfileFiltersComponent } from '../profile-filters/profile-filters.component';
 import { Store } from '@ngrx/store';
 
-import { selectFilteredProfiles } from '../../store';
+import { profileActions, selectFilteredProfiles, selectSaveFiltersProfile } from '../../store';
 
 @Component({
 
@@ -14,5 +14,6 @@ import { selectFilteredProfiles } from '../../store';
 })
 export class SearchPageComponent {
   store = inject(Store);
-  profiles = this.store.selectSignal(selectFilteredProfiles);
+  profiles = this.store.selectSignal(selectSaveFiltersProfile);
+
 }
