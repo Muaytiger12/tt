@@ -1,4 +1,9 @@
 import { TokenResponse } from './auth.interface';
+import {
+  ChatConnectionWSParams,
+  ChatWsService,
+} from './chat-ws-service.interface';
+import { ChatWs } from './chat-ws.interface';
 import { Chat, LastMessageRes, Message } from './chats.interface';
 import { Features } from './features.interface';
 import { Pageble } from './pageble.interface';
@@ -24,6 +29,9 @@ export type {
   Features,
   Comments,
   PostCreateDTO,
-  CommentCreateDTO
+  CommentCreateDTO,
+  ChatWs,
+  ChatWsService,
+  ChatConnectionWSParams
 };
 

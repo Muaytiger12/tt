@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "nx run tt:serve",
+    "start": "nx run tt:serve --no-hmr",
     "build": "nx build",
     "watch": "nx build --watch --configuration development",
     "test": "nx test"
@@ -17,6 +17,8 @@
     "@angular/platform-browser": "^19.2.0",
     "@angular/platform-browser-dynamic": "^19.2.0",
     "@angular/router": "^19.2.0",
+    "@ng-web-apis/common": "^4.12.0",
+    "@ng-web-apis/intersection-observer": "^4.12.0",
     "@ngrx/effects": "^19.2.1",
     "@ngrx/signals": "^19.2.1",
     "@ngrx/store": "^19.2.1",

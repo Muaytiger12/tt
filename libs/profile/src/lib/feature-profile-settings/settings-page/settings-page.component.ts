@@ -1,16 +1,27 @@
-import { Component, effect, inject, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, ViewChild } from '@angular/core';
 
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { AvatarUploadComponent, ProfileHeaderComponent } from '../../ui';
 import { ProfileService } from 'data-access';
+import { StackInputComponent } from 'common-ui';
+import {
+  AddressInputComponent
+} from '../../../../../common-ui/src/lib/components/address-input/address-input.component';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'app-settings-page',
-  imports: [ProfileHeaderComponent, ReactiveFormsModule, AvatarUploadComponent],
+  imports: [
+    ProfileHeaderComponent,
+    ReactiveFormsModule,
+    AvatarUploadComponent,
+    StackInputComponent,
+    AddressInputComponent,
+  ],
   templateUrl: './settings-page.component.html',
   styleUrl: './settings-page.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SettingsPageComponent {
   fb = inject(FormBuilder);
@@ -22,15 +33,14 @@ export class SettingsPageComponent {
     lastName: ['', Validators.required],
     username: [{ value: '', disabled: true }, Validators.required],
     description: [''],
-    stack: [''],
+    stack: [{ value: '', disabled: true }],
+    city: ['', Validators.required],
   });
 
   constructor() {
     effect(() => {
       this.form.patchValue({
         ...this.profileService.me(),
-        //@ts-ignore
-        stack: this.mergeStack(this.profileService.me()?.stack),
       });
     });
   }
@@ -46,24 +56,11 @@ export class SettingsPageComponent {
       );
     }
 
-
     firstValueFrom(
-    // @ts-ignore
+      // @ts-ignore
       this.profileService.patchProfile({
         ...this.form.value,
-        stack: this.splitStack(this.form.value.stack),
       })
     );
-  }
-
-  splitStack(stack: string | null | string[] | undefined): string[] {
-    if (!stack) return [];
-    if (Array.isArray(stack)) return stack;
-    return stack.split(',');
-  }
-  mergeStack(stack: string | null | string[] | undefined) {
-    if (!stack) return '';
-    if (Array.isArray(stack)) return stack.join(',');
-    return stack;
   }
 }

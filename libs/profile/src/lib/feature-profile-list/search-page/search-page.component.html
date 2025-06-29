@@ -1,6 +1,10 @@
 <lib-profile-filters></lib-profile-filters>
-<div class="profile-card__wrapper">
-  @for(profile of profiles(); track profile.id){
-  <lib-profile-card [profile]="profile"></lib-profile-card>
+<div class="profile-card__wrapper" waIntersectionObserver waIntersectionThreshold="0.9">
+  @for (profile of profiles(); track profile.id; let last = $last) {
+
+    <lib-profile-card (waIntersectionObservee)="last ? onIntersection($event) : null"
+                      [profile]="profile"></lib-profile-card>
+
   }
 </div>
+

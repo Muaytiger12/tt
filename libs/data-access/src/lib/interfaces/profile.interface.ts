@@ -6,7 +6,7 @@ export interface Profile {
   firstName: string;
   lastName: string;
   isActive: boolean;
-  stack: string[];
+  stack: any;
   city: string;
   description: string;
 }

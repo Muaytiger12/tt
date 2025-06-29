@@ -9,19 +9,12 @@ import {
   SettingsPageComponent
 } from 'profile';
 import { chatsRoutes } from 'chat';
-import { FormsComponent } from 'experimental';
+import { CounterComponent, FormsComponent } from 'experimental';
 import { canActivateAuth, LoginPageComponent } from 'auth';
 import { LayoutComponent } from 'layout';
 import { provideState } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { PostsEffects, postsFeature } from 'posts';
-
-
-
-
-
-
-
 
 export const routes: Routes = [
   {
@@ -53,7 +46,7 @@ export const routes: Routes = [
       },
       {
         path: 'experimental',
-        component: FormsComponent,
+        component: CounterComponent,
       },
     ],
     canActivate: [canActivateAuth],

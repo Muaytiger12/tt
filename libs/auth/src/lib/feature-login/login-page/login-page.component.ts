@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -8,29 +8,31 @@ import {
 
 import { Router } from '@angular/router';
 import { AuthService } from 'data-access';
+import { TtInputComponent } from 'common-ui';
 
 @Component({
   selector: 'lib-login-page',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, TtInputComponent],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
 })
-export class LoginPageComponent {
+export class LoginPageComponent implements OnInit {
   authService = inject(AuthService);
   router = inject(Router);
   isPasswordVisible = signal<boolean>(false);
-  constructor() {}
   form = new FormGroup({
-    //сделать типизацию формы
-    username: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
+    username: new FormControl<string | null>(null, Validators.required),
+    password: new FormControl<string | null>(null, Validators.required),
   });
+  ngOnInit() {
+    this.form.valueChanges
+      .subscribe(val => console.log(val))
+  }
   onSubmit() {
     if (this.form.valid) {
-      //@ts-ignore
-      this.authService.login(this.form.value).subscribe((val) => {
+      // @ts-ignore
+      this.authService.login(this.form.value).subscribe(() => {
         this.router.navigate(['']);
-        return val;
       });
     }
   }

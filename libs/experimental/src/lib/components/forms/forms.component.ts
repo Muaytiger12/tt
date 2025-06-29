@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   ReactiveFormsModule,
   FormGroup,
@@ -70,6 +70,7 @@ function validateDateRange({
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './forms.component.html',
   styleUrl: './forms.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormsComponent {
   mockService = inject(MockService);
@@ -146,7 +147,6 @@ export class FormsComponent {
     this.form.updateValueAndValidity();
 
     if (this.form.invalid) return;
-    console.log(this.form.value);
   }
 
   addAddress() {

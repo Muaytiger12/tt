@@ -3,15 +3,18 @@ import { profileFeature } from './reducer';
 
 export const selectFilteredProfiles = createSelector(
   profileFeature.selectProfiles,
-  (profiles) => {
-    console.log('SELECTOR ',profiles)
-     return profiles
+  (profiles) => profiles
+);
+export const selectFiltersProfile = createSelector(
+  profileFeature.selectProfileFilters,
+  (filters) => filters
+);
+export const selectProfilePageble = createSelector(
+  profileFeature.selectProfileFeatureState,
+  (state) => {
+    return {
+      page: state.page,
+      size: state.size,
+    };
   }
-)
-export const selectSaveFiltersProfile = createSelector(
-  profileFeature.selectProfiles,
-  (profiles) => {
-     return profiles
-  }
-)
-
+);

@@ -1,7 +1,5 @@
 import { Profile } from './profile.interface';
 
-
-
 export interface Chat {
   id: number;
   userFirst: Profile;
@@ -16,8 +14,8 @@ export interface Message {
   personalChatId: number;
   text: string;
   createdAt: string | any;
-  isRead: true;
-  updatedAt: string;
+  isRead: boolean;
+  updatedAt?: string;
   user?: Profile;
   isMine?: boolean;
 }

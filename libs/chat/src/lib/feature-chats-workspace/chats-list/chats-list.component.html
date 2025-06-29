@@ -10,8 +10,10 @@
   </label>
 </div>
 @for(chat of chats$ | async;track chat.id ){
-
-<button chats [chat]="chat" [routerLink]="[chat.id]" routerLinkActive="active" ></button>
+<!--  @if(unread() !== 0) {-->
+<!--    <span >{{unread()}}</span>-->
+<!--  }-->
+<button chats [chat]="chat" [routerLink]="[chat.id]" routerLinkActive="active"></button>
 }
 
 

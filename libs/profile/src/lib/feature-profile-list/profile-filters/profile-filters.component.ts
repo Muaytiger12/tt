@@ -1,13 +1,12 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   FormBuilder,
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { debounceTime, startWith, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, startWith, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
-import {profileActions, selectFilteredProfiles} from '../../store';
-import {toObservable} from '@angular/core/rxjs-interop';
+import { profileActions, selectFilteredProfiles, selectFiltersProfile } from '../../store';
 
 
 
@@ -17,11 +16,13 @@ import {toObservable} from '@angular/core/rxjs-interop';
   imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './profile-filters.component.html',
   styleUrl: './profile-filters.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileFiltersComponent {
   fb = inject(FormBuilder);
   sub = new Subscription();
   store = inject(Store);
+  saveProfiles = this.store.selectSignal(selectFiltersProfile);
   formFilters = this.fb.group({
     firstName: [''],
     lastName: [''],
@@ -29,16 +30,17 @@ export class ProfileFiltersComponent {
   });
 
   constructor() {
+      const filters = this.saveProfiles() ?? {};
+      this.formFilters.patchValue(filters);
+      this.store.dispatch(profileActions.filterEvents({ filter: filters }));
 
-
-    this.sub = this.formFilters.valueChanges
-      .pipe(startWith({}), debounceTime(400))
-      .subscribe((form) => {
-
-        this.store.dispatch(profileActions.filterEvents({filters: form}))
-
-      });
+      this.sub = this.formFilters.valueChanges
+        .pipe(debounceTime(400))
+        .subscribe((form) => {
+          this.store.dispatch(profileActions.filterEvents({ filter: form }));
+        });
   }
+
 
   ngOnDestroy() {
     this.sub.unsubscribe();

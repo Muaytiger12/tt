@@ -25,7 +25,7 @@ export class AuthService {
     return !!this.token;
   }
 
-  login(payload: { username: string; password: string }) {
+  login(payload: { username: string , password: string }) {
     const fd = new FormData();
     fd.append('username', payload.username);
     fd.append('password', payload.password);

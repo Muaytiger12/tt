@@ -14,11 +14,9 @@ export class PostsEffects {
 
   fetchAndDisplayPosts$ = createEffect(() => {
     return this.actions$.pipe(
-      tap((tap) => console.log(tap)),
       ofType(postsActions.fetchPosts),
       switchMap(() =>
         this.postsService.fetchPosts().pipe(
-          tap(tap => console.log(tap)),
           map((posts) => postsActions.loadPosts({ posts: posts }))
         )
       )

@@ -1,11 +1,11 @@
 import {
-  AfterViewInit,
+  AfterViewInit, ChangeDetectionStrategy,
   Component,
   ElementRef,
   inject,
   OnDestroy,
   OnInit,
-  Renderer2,
+  Renderer2
 } from '@angular/core';
 import { PostInputComponent } from '../../ui/index';
 import { PostComponent } from '../post/post.component';
@@ -20,6 +20,7 @@ import { selectAllPosts } from '../../store/selectors';
   imports: [PostInputComponent, PostComponent],
   templateUrl: './post-feed.component.html',
   styleUrl: './post-feed.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PostFeedComponent implements OnInit, OnDestroy, AfterViewInit {
   profile = inject(GlobalStoreService).me;

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ChatsBtnComponent } from '../chats-btn/chats-btn.component';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AsyncPipe } from '@angular/common';
@@ -17,10 +17,12 @@ import { ChatsService } from 'data-access';
   ],
   templateUrl: './chats-list.component.html',
   styleUrl: './chats-list.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatsListComponent {
   chatsService = inject(ChatsService);
   filterChatsControl = new FormControl();
+  // unread = inject(ChatsService).unreadChatMessages;
   chats$ = this.chatsService.getMyChats().pipe(
     switchMap((chats) => {
       return this.filterChatsControl.valueChanges.pipe(

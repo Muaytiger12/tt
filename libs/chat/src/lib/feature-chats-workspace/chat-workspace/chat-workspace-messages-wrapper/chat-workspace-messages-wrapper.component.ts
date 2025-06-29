@@ -1,5 +1,5 @@
 import {
-  AfterViewInit,
+  AfterViewInit, ChangeDetectionStrategy,
   Component,
   ElementRef,
   inject,
@@ -13,7 +13,6 @@ import { ChatWorkspaceMessagesComponent } from './chat-workspace-messages/chat-w
 import {
   BehaviorSubject,
   debounceTime,
-  firstValueFrom,
   fromEvent,
   Subscription, switchMap,timer
 } from 'rxjs';
@@ -32,6 +31,7 @@ import { Chat, ChatsService, Message } from 'data-access';
   ],
   templateUrl: './chat-workspace-messages-wrapper.component.html',
   styleUrl: './chat-workspace-messages-wrapper.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatWorkspaceMessagesWrapperComponent
   implements OnInit, AfterViewInit, OnDestroy
@@ -46,10 +46,10 @@ export class ChatWorkspaceMessagesWrapperComponent
   res = new BehaviorSubject(this.groupByDate());
 
   ngOnInit() {
-    this.pollingSub = timer(0, 50000)
+    this.pollingSub = timer(0, 10000)
       .pipe(
         switchMap(() => {
-          console.log('Послали запрос на отрисовку')
+          // Послали запрос на отрисовку
           return this.chatsService.getChatById(this.chat().id)
         })
       )
@@ -85,10 +85,9 @@ export class ChatWorkspaceMessagesWrapperComponent
   }
 
   async onSendMessage(message: string) {
-    await firstValueFrom(
-      this.chatsService.sendMessage(this.chat().id, message)
-    );
-    await firstValueFrom(this.chatsService.getChatById(this.chat().id));
+
+    this.chatsService.wsAdapter.sendMessage(message,this.chat().id)
+
   }
 
   groupByDate() {

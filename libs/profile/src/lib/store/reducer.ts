@@ -4,11 +4,15 @@ import { Profile } from 'data-access';
 
 export interface ProfileState {
   profiles: Profile[],
-  profileFilters: Record<string, any>
+  profileFilters: Record<string, any>,
+  page: number,
+  size: number
 }
 export const initialState: ProfileState = {
   profiles: [],
-  profileFilters: {}
+  profileFilters: {},
+  page: 1,
+  size: 5
 }
 
 export const profileFeature = createFeature({
@@ -16,20 +20,28 @@ export const profileFeature = createFeature({
   reducer: createReducer(
     initialState,
     on(profileActions.profilesLoaded, (state, payload) => {
-      console.log('REDUCER',state,payload)
+
       return {
         ...state,
-        profiles: payload.profiles,
-      }
+        profiles: state.profiles.concat(payload.profiles),
+      };
     }),
-    on(profileActions.profileFiltersSave, (state, payload) => {
-      console.log('REDUCER',state,payload)
+    on(profileActions.filterEvents, (state, payload) => {
       return {
         ...state,
-        profilesFilters: payload.profilesFilter,
-      }
+        profiles: [],
+        profileFilters: payload.filter,
+        page: 1,
+      };
+    }),
+    on(profileActions.setPage, (state, payload) => {
+      let page = payload.page;
+      if (!page) page = state.page + 1;
+      return {
+        ...state,
+        page,
+      };
     })
-
   ),
+});
 
-})

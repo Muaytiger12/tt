@@ -1,4 +1,4 @@
-import { Component, inject, input, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, OnInit, signal } from '@angular/core';
 import { AvatarCircleComponent } from 'common-ui';
 import { SvgComponent } from 'common-ui';
 import { firstValueFrom } from 'rxjs';
@@ -19,6 +19,7 @@ import {postsActions} from '../../store';
   ],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PostComponent {
   post = input<Post>();

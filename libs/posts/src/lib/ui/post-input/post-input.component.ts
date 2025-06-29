@@ -1,11 +1,12 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   HostBinding,
   inject,
   input,
   Output,
-  Renderer2,
+  Renderer2
 } from '@angular/core';
 
 import { NgIf } from '@angular/common';
@@ -18,6 +19,7 @@ import { GlobalStoreService } from 'data-access';
   selector: 'lib-post-input',
   styleUrl: './post-input.component.scss',
   templateUrl: './post-input.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PostInputComponent {
   isCommentInput = input(false);
