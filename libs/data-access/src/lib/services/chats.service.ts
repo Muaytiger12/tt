@@ -15,12 +15,12 @@ import { isNewMessage, isUnreadMessage } from '../interfaces/type-guard';
 export class ChatsService {
   http = inject(HttpClient);
   me = inject(ProfileService).me;
-  baseApiUrl = 'https://icherniakov.ru/yt-course/';
+  #authService = inject(AuthService);
+  baseApiUrl = '/yt-course/';
   chatsUrl = `${this.baseApiUrl}chat/`;
   messageUrl = `${this.baseApiUrl}message/`;
   activeChatMessages = signal<Message[]>([]);
   unreadChatMessages = signal<number>(0);
-  #authService = inject(AuthService);
   wsAdapter: ChatWsService = new ChatsWsNativeService();
 
   createChat(userId: number) {

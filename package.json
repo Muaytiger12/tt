@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "nx run tt:serve --no-hmr",
-    "build": "nx build",
+    "build": "nx build tt",
     "watch": "nx build --watch --configuration development",
     "test": "nx test"
   },
