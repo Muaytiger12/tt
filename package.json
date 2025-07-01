@@ -8,6 +8,9 @@
     "watch": "nx build --watch --configuration development",
     "test": "nx test"
   },
+  "engines": {
+    "node": "22.13.1"
+  },
   "private": true,
   "dependencies": {
     "@angular/common": "^19.2.0",
